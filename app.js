@@ -134,7 +134,7 @@ app.post("/addfriend",function(req,res){
 });
 
 app.get('/',function(req,res){
-   res.send("Hello"); 
+   res.redirect("/friends"); 
 });
 
 
