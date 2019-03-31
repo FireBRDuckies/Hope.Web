@@ -1,0 +1,7 @@
+<% include partials/header %>
+    <h1>Welcome</h1>
+    <% results["Search"].forEach(function(movie){ %>
+         <%= movie["Title"] %> <br>
+    <% }); %>
+ 
+<% include partials/footer %>

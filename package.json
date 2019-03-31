@@ -1,0 +1,20 @@
+{
+  "name": "expess_app",
+  "version": "1.0.0",
+  "description": "colt steele tutorials",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "firebase": "^5.9.2",
+    "request": "^2.87.0",
+    "require": "^2.4.20"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anmol Chugh",
+  "license": "ISC"
+}

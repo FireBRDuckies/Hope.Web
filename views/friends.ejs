@@ -1,0 +1,104 @@
+<html>
+    
+    <head>
+        <title>Hope</title>
+        <link rel="stylesheet" href="/home.css">
+    </head>
+    <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD2wOFVVPSe3yBEo7j5lc4f611g1eSTIdM",
+    authDomain: "hope-7fb17.firebaseapp.com",
+    databaseURL: "https://hope-7fb17.firebaseio.com",
+    projectId: "hope-7fb17",
+    storageBucket: "hope-7fb17.appspot.com",
+    messagingSenderId: "988629004611"
+  };
+  firebase.initializeApp(config);
+</script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script>
+    
+<body>
+<h1>Welcome</h1>
+<!--<div id="main-box">-->
+<!--<ol>-->
+<!--    <% for(var i=0;i< friends.length;i++){ %>-->
+<!--        <li>Name:<%= friends[i][0] %> Condition:</li>-->
+<!--    <% } %>-->
+  
+<!--</ol>-->
+<!--</div>-->
+<section class="module">
+  
+  <h1 class="module__heading module__heading--b">Appointments</h1>
+  <ol class="custom-bullet custom-bullet--b">
+      <% for(var i=friends.length-1;i>=0;i--) { %>
+        <!--console.log(friends[i]);-->
+        <li>Name:<%= friends[i]['name'] %><br>Progress: <%= friends[i]['progress'] %><br> 
+        <% if(friends[i]['time']==0){ %>
+            Time:Not Alloted<br>
+        <% } else { %>
+            Time: <%=friends[i]['time'] %><br>
+        <% } %>
+        </li>
+       <div class="box">
+	<a class="button" href="#popup1" >
+	    <button class = 'allot' value=<%= friends[i]['key'] %> >
+	    Allot </button>
+	    </a>
+     </div></li>
+      <% } %>
+  </ol>
+  
+</section>
+
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<h2>Book Appointment</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+			<label for="appt">Choose a time for your meeting:</label>
+
+        <input type="time" id="appt" name="appt"
+       min="0:00" max="23:99" required>
+       
+       <button id='update'>Allot</button>
+		</div>
+	</div>
+</div>
+
+<script>
+   
+    $(document).ready(()=>{
+        const database = firebase.database();
+         var key;
+        var allButtons = document.getElementsByClassName('allot');
+        var updateButtons = document.getElementsByClassName('update');
+        // console.log(allButtons);
+        for(var i=0;i<allButtons.length;i++){
+          allButtons[i].addEventListener("click",function(self){
+              key = this.value;
+              console.log(key);
+          });
+          
+        }
+        $('#update').click(()=>{
+           console.log(key);
+           var value = document.getElementById('appt').value;
+           console.log(value);
+          var userRef = database.ref('appointments/' + key).update({'time':value});
+        });
+       
+       
+       
+    });
+</script>
+<!--<form action="/addfriend" method="POST" name="">-->
+    <!--<input placeholder="friend" name="newfriend"></input>-->
+    <!--<button> Create a new friend </button>-->
+<!--</form>-->
+<% include partials/footer %>
